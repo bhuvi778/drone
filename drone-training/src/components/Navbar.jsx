@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, Rocket } from 'lucide-react';
 
@@ -15,11 +16,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'COURSES', href: '#programs' },
-    { name: 'ADMISSION', href: '#admission' },
-    { name: 'FACILITIES', href: '#drones' },
-    { name: 'ABOUT US', href: '#about' },
-    { name: 'CONTACT', href: '#contact' },
+    { name: 'HOME', href: '/' },
+    { name: 'COURSES', href: '/#programs' },
+    { name: 'ABOUT US', href: '/about-us' },
+    { name: 'CENTERS', href: '/training-centers' },
+    { name: 'CONTACT', href: '/#contact' },
   ];
 
   return (
@@ -33,36 +34,44 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3 cursor-pointer"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-cyan-500 blur-lg opacity-40 rounded-full"></div>
-              <Rocket className="w-8 h-8 text-cyan-400 relative z-10" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-white tracking-[0.15em] leading-none">UAV PILOT</span>
-              <span className="text-xs text-cyan-400 tracking-[0.2em] font-light">ACADEMY</span>
-            </div>
-          </motion.div>
+          <Link to="/">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center cursor-pointer"
+            >
+              <img
+                src={`/logo.png?v=${Date.now()}`}
+                alt="UAV Pilot Academy"
+                className={`transition-all duration-300 ${isScrolled ? 'h-12' : 'h-16'}`}
+              />
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-12">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="relative group text-sm font-medium tracking-widest text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                {link.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_rgba(249,115,22,0.8)]"></span>
-              </motion.a>
-            ))}
+            {navLinks.map((link, index) => {
+              const isHashLink = link.href.includes('#');
+              const Component = isHashLink ? 'a' : Link;
+              const linkProps = isHashLink ? { href: link.href } : { to: link.href };
+
+              return (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Component
+                    {...linkProps}
+                    className="relative group text-sm font-medium tracking-widest text-gray-300 hover:text-white transition-colors duration-200"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_rgba(249,115,22,0.8)]"></span>
+                  </Component>
+                </motion.div>
+              );
+            })}
 
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(6,182,212,0.4)" }}
@@ -92,16 +101,22 @@ const Navbar = () => {
             className="lg:hidden mt-4 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden"
           >
             <div className="p-4 space-y-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block text-center text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium tracking-widest py-3 rounded text-sm border-l-2 border-transparent hover:border-cyan-500"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isHashLink = link.href.includes('#');
+                const Component = isHashLink ? 'a' : Link;
+                const linkProps = isHashLink ? { href: link.href } : { to: link.href };
+
+                return (
+                  <Component
+                    key={link.name}
+                    {...linkProps}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block text-center text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium tracking-widest py-3 rounded text-sm border-l-2 border-transparent hover:border-cyan-500"
+                  >
+                    {link.name}
+                  </Component>
+                );
+              })}
               <button className="w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded font-bold tracking-widest uppercase text-sm mt-4">
                 Apply Now
               </button>

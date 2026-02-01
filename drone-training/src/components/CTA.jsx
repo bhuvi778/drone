@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Send, Phone, CheckCircle, Zap, Shield } from 'lucide-react';
+import { Send, Phone, CheckCircle, Zap, Shield, Smartphone } from 'lucide-react';
 
 const CTA = () => {
   return (
@@ -91,12 +91,13 @@ const CTA = () => {
               ))}
             </motion.div>
 
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -109,6 +110,19 @@ const CTA = () => {
                   Enroll Now <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </motion.button>
+
+              <motion.a
+                href="#download-app"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-none text-white font-bold tracking-widest uppercase overflow-hidden"
+                style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
+              >
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative flex items-center gap-3">
+                  Download App <Smartphone className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                </span>
+              </motion.a>
             </motion.div>
 
             {/* Additional Info */}

@@ -61,9 +61,23 @@ const About = () => {
           <h3 className="text-3xl md:text-5xl font-bold mb-6 font-display text-white">
             Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Drone Training</span> Agency
           </h3>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
-            DronePro Academy is a leading drone training institution dedicated to producing skilled, certified, and responsible drone operators. We combine cutting-edge technology with expert instruction to deliver world-class training programs.
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto font-light leading-relaxed mb-8">
+            UAV Pilot Academy is managed by <span className="text-cyan-400 font-semibold">SEWA</span>, registered under the Maharashtra Unaided Private Professional Educational Institutions Act, 2015. Active in education and skill development since 2010, we are <span className="text-cyan-400 font-semibold">ISO 9001:2015 Certified</span> and registered under <span className="text-cyan-400 font-semibold">MSME</span>.
           </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <div className="px-4 py-2 bg-cyan-900/20 border border-cyan-500/30 rounded-full text-cyan-400">
+              ISO 9001:2015 Certified
+            </div>
+            <div className="px-4 py-2 bg-cyan-900/20 border border-cyan-500/30 rounded-full text-cyan-400">
+              MSME Registered
+            </div>
+            <div className="px-4 py-2 bg-cyan-900/20 border border-cyan-500/30 rounded-full text-cyan-400">
+              DGCA Aligned Programs
+            </div>
+            <div className="px-4 py-2 bg-cyan-900/20 border border-cyan-500/30 rounded-full text-cyan-400">
+              Since 2010
+            </div>
+          </div>
         </motion.div>
 
         {/* Features Grid */}
@@ -121,23 +135,63 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Mission Statement */}
+        {/* Mission & Vision Statement */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20 text-center"
+          className="mt-20"
         >
-          <div className="relative max-w-4xl mx-auto px-6">
-            <Trophy className="w-12 h-12 text-cyan-500 mx-auto mb-6 opacity-80" />
-            <p className="text-xl md:text-3xl text-white font-light leading-relaxed font-display">
-              "Our mission is to empower the next generation of drone professionals with <span className="text-cyan-400">comprehensive training</span>, ensuring safety, compliance, and excellence in every flight."
-            </p>
-            <div className="mt-8 flex items-center justify-center gap-2">
-              <div className="h-1 w-1 bg-cyan-500 rounded-full"></div>
-              <div className="h-1 w-12 bg-cyan-800 rounded-full"></div>
-              <div className="h-1 w-1 bg-cyan-500 rounded-full"></div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Mission */}
+            <div className="relative bg-gradient-to-br from-slate-900/50 to-slate-800/30 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-cyan-500/30 transition-all">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-t-2xl"></div>
+              <Trophy className="w-10 h-10 text-cyan-500 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
+              <p className="text-gray-400 leading-relaxed">
+                To empower the next generation of drone professionals through <span className="text-cyan-400 font-semibold">discipline-driven training</span>,
+                <span className="text-cyan-400 font-semibold"> aviation safety</span>, <span className="text-cyan-400 font-semibold">regulatory compliance</span>,
+                and <span className="text-cyan-400 font-semibold">application-based learning</span>. We operate multiple training centers across India,
+                ensuring accessibility and excellence in drone education aligned with DGCA and industry standards.
+              </p>
+            </div>
+
+            {/* Vision */}
+            <div className="relative bg-gradient-to-br from-slate-900/50 to-slate-800/30 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-cyan-500/30 transition-all">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t-2xl"></div>
+              <Target className="w-10 h-10 text-blue-500 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
+              <p className="text-gray-400 leading-relaxed">
+                To be India's most trusted and comprehensive drone training institution, recognized for producing
+                <span className="text-cyan-400 font-semibold"> skilled, certified, and responsible drone operators</span> who contribute
+                to the advancement of the drone industry while maintaining the highest standards of safety, compliance, and professionalism.
+              </p>
+            </div>
+          </div>
+
+          {/* Core Focus Areas */}
+          <div className="mt-12 max-w-4xl mx-auto">
+            <h4 className="text-xl font-bold text-white text-center mb-6">Our Core Focus Areas</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                "Discipline-Driven Training",
+                "Aviation Safety",
+                "Regulatory Compliance",
+                "Application-Based Learning"
+              ].map((focus, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                  className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-xl p-4 text-center"
+                >
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full mx-auto mb-2"></div>
+                  <p className="text-sm text-gray-300">{focus}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.div>
